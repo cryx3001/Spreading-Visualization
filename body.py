@@ -1,6 +1,5 @@
 import math
 import random
-from threading import Thread
 
 
 class Body:
@@ -35,7 +34,7 @@ class Body:
 			self.modify_speed()
 			self.dep(True)
 		else:
-			self.dep(False)  # Even if it doesn't move, it "stimulates" the body to be detectable for collions.
+			self.dep(False)  # Even if it doesn't move, it "stimulates" the body so it can be detectable for collisions.
 
 		self.detect_collision()
 
@@ -48,8 +47,7 @@ class Body:
 			self.win.after(10000, self.dep, False)
 
 	def check_position(self):
-		self.center[0] = self.canv.coords(self.draw)[0] + self.size / 2
-		self.center[1] = self.canv.coords(self.draw)[1] + self.size / 2
+		self.center = [self.canv.coords(self.draw)[0] + self.size / 2, self.canv.coords(self.draw)[1] + self.size / 2]
 		win = [self.win.winfo_width(), self.win.winfo_height()]
 
 		if self.center[0] <= 0:
@@ -62,13 +60,12 @@ class Body:
 			self.teleport(0, -win[1])
 
 	def teleport(self, tp_x, tp_y):
-		x = [self.canv.coords(self.draw)[0], self.canv.coords(self.draw)[2]]
-		y = [self.canv.coords(self.draw)[1], self.canv.coords(self.draw)[3]]
+		x, y = [self.canv.coords(self.draw)[0], self.canv.coords(self.draw)[2]], [self.canv.coords(self.draw)[1],
+																				  self.canv.coords(self.draw)[3]]
 		self.canv.coords(self.draw, x[0] + tp_x, y[0] + tp_y, x[1] + tp_x, y[1] + tp_y)
 
 	def modify_speed(self):
-		self.speed[0] = random.randrange(-2, 2)
-		self.speed[1] = random.randrange(-2, 2)
+		self.speed = [random.randrange(-2, 2), random.randrange(-2, 2)]
 		self.win.after(random.randrange(100, 200), self.modify_speed)
 
 	def get_distance(self, obj0, obj1):
