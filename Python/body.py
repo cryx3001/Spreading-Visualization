@@ -22,7 +22,6 @@ class Body:
 										  self.ini_pos[1] + self.size, width=1, outline="black",
 										  fill="green")
 		all_instances.append(self)
-
 		if id == 0:
 			self.type = 1  # 0:Healthy; 1:Sick;
 			self.canv.itemconfig(self.draw, fill="red")

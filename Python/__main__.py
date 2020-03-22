@@ -1,5 +1,6 @@
 import tkinter
 from body import Body
+import os
 
 win = tkinter.Tk()
 canv = tkinter.Canvas(win, width=600, height=600, bg="#c2c2c2")
@@ -9,7 +10,7 @@ i = 0
 
 def generate_bodies(canv, rate):
 	global i, list
-	while i <= 200:
+	while i < 150:
 		list.append(Body(i, win, canv, rate))
 		i = i + 1
 
